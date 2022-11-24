@@ -1,0 +1,27 @@
+
+// SPDX-License-Identifier: MIT
+
+pragma solidity >=0.7.0 <0.9.0;
+
+contract Dbank {
+
+    address public owner;
+
+    constructor() public {
+        owner = msg.sender;
+    }
+    
+     function withdraw(address payable _to, uint _amount) public{
+         require(owner == msg.sender, "You are not allowed");
+        _to.transfer(_amount);
+    }
+
+    fallback () external payable {
+
+    }
+
+    function balance() public returns (uint256){
+    return payable(address(this)).balance;
+  }
+
+}
